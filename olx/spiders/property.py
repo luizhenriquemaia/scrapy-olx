@@ -6,19 +6,27 @@ class QuotesSpider(scrapy.Spider):
     name = "property"
     allowed_domains = ['go.olx.com.br']
 
+    def __init__(self, region, apartment, **kwargs):
+        if region == "":
+            self.start_urls = 'https://go.olx.com.br/imoveis'
+        else:
+            region.replace(" ", "-")
+            if apartment == "True":
+                self.start_urls = [f'https://go.olx.com.br/grande-goiania-e-anapolis/{region}/imoveis/venda/apartamentos']
+            else:
+                self.start_urls = [f'https://go.olx.com.br/grande-goiania-e-anapolis/{region}/imoveis/venda/casas']
+
     def start_requests(self):
         headers= {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:48.0) Gecko/20100101 Firefox/48.0'}
-        urls = [
-            'https://go.olx.com.br/imoveis',
-        ]
-        for url in urls:
+        for url in self.start_urls:
             yield scrapy.Request(url=url, headers=headers, callback=self.parse)
     
     def parse(self, response):
         headers= {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:48.0) Gecko/20100101 Firefox/48.0'}
-        max_page = int(response.css(".sc-1ef50gp-1.eIToex > a > div > span::text").extract()[-1])
-        for page_number in range(2, max_page + 1):
-            page_url = f'https://go.olx.com.br/imoveis?o={page_number}'
+        last_page_link = response.css("div.sc-hmzhuo.hMZElg.sc-jTzLTM.iwtnNi > a::attr(href)").extract()[0]
+        last_page_number = int(last_page_link.split('?o=')[1])
+        for page_number in range(2, last_page_number + 1):
+            page_url = self.start_urls[0] + f'?o={page_number}'
             yield scrapy.Request(page_url, headers=headers, callback=self.parse_page)
 
     def parse_page(self, response):
