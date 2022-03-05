@@ -33,6 +33,9 @@ PyDispatcher==2.0.5
 pyinstaller==4.9
 pyinstaller-hooks-contrib==2022.2
 pyOpenSSL==22.0.0
+PyQt5==5.15.6
+PyQt5-Qt5==5.15.2
+PyQt5-sip==12.9.1
 pywin32-ctypes==0.2.0
 queuelib==1.6.2
 requests==2.27.1
