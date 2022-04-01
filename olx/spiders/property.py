@@ -43,12 +43,4 @@ class QuotesSpider(scrapy.Spider):
             date_hour = content.css("div.fnmrjs-7.erUydy > div.fnmrjs-10.gHqbSa > div > div > span::text").extract()
             items['date'] = date_hour[0]
             items['hour'] = date_hour[1]
-            yield items
-        # get the href =    (".sc-1fcmfeb-2.fvbmlV > a::attr(href)")[0].extract()
-        # get text title =  (".sc-1fcmfeb-2.fvbmlV > a > div > div.fnmrjs-2.jiSLYe > div.fnmrjs-4.jflPgo > div.fnmrjs-6.iNpuEh>div>h2::attr(title)")[0]
-        ##ad-list > li:nth-child(2) > a > div > div.fnmrjs-2.jiSLYe > div.fnmrjs-4.jflPgo > div.fnmrjs-6.iNpuEh > div:nth-child(3) > span
-        # get span text =   (".sc-1fcmfeb-2.fvbmlV > a > div > div.fnmrjs-2.jiSLYe > div.fnmrjs-4.jflPgo > div.fnmrjs-6.iNpuEh>div>span::text")
-        # #ad-list > li:nth-child(2) > a > div > div.fnmrjs-2.jiSLYe > div.fnmrjs-4.jflPgo > div.fnmrjs-7.erUydy > div.fnmrjs-9.gqfQzY > div:nth-child(1) > div > span
-        # get price =       (".sc-1fcmfeb-2.fvbmlV > a > div > div.fnmrjs-2.jiSLYe > div.fnmrjs-4.jflPgo > div.fnmrjs-7.erUydy > div.fnmrjs-9.gqfQzY > div > div > span::text")
-        ##ad-list > li:nth-child(2) > a > div > div.fnmrjs-2.jiSLYe > div.fnmrjs-4.jflPgo > div.fnmrjs-7.erUydy > div.fnmrjs-10.gHqbSa > div > div > span:nth-child(1)
-        # get date_hour =   (".sc-1fcmfeb-2.fvbmlV>a>div > div.fnmrjs-2.jiSLYe > div.fnmrjs-4.jflPgo > div.fnmrjs-7.erUydy > div.fnmrjs-10.gHqbSa > div > div > span::text")   
+            yield items  

@@ -58,6 +58,8 @@ class Windown(QMainWindow):
         property_type = self.combo_property_choices.currentText().lower()
         apartment = True if property_type == 'apartamento' else False
         region = self.input_region.text().lower().replace(" ", "-").replace("ã", "a")
+        splited_region = region.split("-")
+        if len(splited_region) < 2: region = f"regiao-{region}"
         file_name = self.input_file_name.text().lower().replace(" ", "-").replace("ã", "a") + ".csv"
         file_name_with_path = "file:///" + self.folder_path + "/" + file_name
         init_property_spider(region, apartment, file_name_with_path)
